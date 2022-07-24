@@ -1,37 +1,25 @@
 import { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 
+import { CommonProps, TableParamsTypes, FilterBy } from '../../types';
+
 import styles from './Filters.module.scss';
 
-interface FiltersProps {
-  store?: {};
-  updateStore?: (val) => void;
-}
-
-// OR
-
-//interface FiltersProps {
-//  selected?: {};
-//  updateSelected?: (val) => void;
-//}
-
-// OR store can be global
 
 const OPTIONS = [
   {
-    title: 'Without posts',
+    title: FilterBy.WITHOUT_POSTS,
   },
   {
-    title: 'More than 100 posts',
+    title: FilterBy.MORE_THAN_HUNDRED_POSTS,
   },
 ];
 
-export function Filters(props: FiltersProps) {
+export function Filters(props: CommonProps) {
+  const { dispatch } = props;
   const [selectedFilter, setSelectedFilter] = useState<string[]>([]);
-
+  
   const onChange = ({ title }) => {
-    console.log(title); // for debugging
-
     let updatedFilters;
     if (selectedFilter.find((filter) => filter === title)) {
       updatedFilters = selectedFilter.filter(
@@ -42,6 +30,7 @@ export function Filters(props: FiltersProps) {
     }
 
     setSelectedFilter(updatedFilters);
+    dispatch({ type: TableParamsTypes.FILTER, payload: updatedFilters });
   };
 
   return (
