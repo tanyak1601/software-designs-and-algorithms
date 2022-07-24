@@ -3,28 +3,18 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
+import { CommonProps, TableParamsTypes } from '../../types';
+
 import styles from './Search.module.scss';
 
-interface SearchProps {
-  store?: {};
-  updateStore?: (val) => void;
-}
 
-// OR
-
-//interface SearchProps {
-//  selected?: {};
-//  updateSelected?: (val) => void;
-//}
-
-// OR store can be global
-
-export function Search(props: SearchProps) {
+export function Search(props: CommonProps) {
+  const { dispatch } = props;
   const [searchedValue, setSearchedValue] = useState<string>('');
 
-  const onChange = (value) => {
-    console.log(value); // for debugging
+  const onChange = (value = '') => {
     setSearchedValue(value);
+    dispatch({ type: TableParamsTypes.SEARCH, payload: value });
   }
 
   return (

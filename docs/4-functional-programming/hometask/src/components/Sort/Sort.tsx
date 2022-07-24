@@ -4,25 +4,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+import { CommonProps, TableParamsTypes, SortBy } from '../../types';
+
 import styles from './Sort.module.scss'
 
-interface SortProps {
-  store?: {};
-  updateStore?: (val) => void;
-}
 
-// OR
+export function Sort(props: CommonProps) {
+  const { dispatch } = props;
 
-//interface SortProps {
-//  selected?: {};
-//  updateSelected?: (val) => void;
-//}
-
-// OR store can be global
-
-export function Sort(props: SortProps) {
-  const handleChange = (value) => {
-    console.log(value); // for debugging
+  const handleChange = (value: SortBy) => {
+    dispatch({ type: TableParamsTypes.SORT_BY, payload: value });
   };
 
   return (
@@ -34,10 +25,10 @@ export function Sort(props: SortProps) {
         className={styles.group}
         aria-label="sorting"
         name="radio-buttons-group"
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value as SortBy)}
       >
-        <FormControlLabel value="desc" control={<Radio />} label="desc" />
-        <FormControlLabel value="asc" control={<Radio />} label="asc" />
+        <FormControlLabel value={SortBy.DESC} control={<Radio />} label={SortBy.DESC} />
+        <FormControlLabel value={SortBy.ASC} control={<Radio />} label={SortBy.ASC} />
       </RadioGroup>
     </FormControl>
   );
