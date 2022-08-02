@@ -1,5 +1,5 @@
-import { IShipment, IdGenerator, ShipmentData } from './types'
-import {} from './IdGenerator';
+import { IShipment, IdGenerator, ShipmentData, IShipper } from './types'
+import { ShipperFactory } from './Shipper';
 
 export class Shipment implements IShipment{
   private RATE: number = 39;
@@ -22,10 +22,6 @@ export class Shipment implements IShipment{
     this.idGenerator = idGenerator;
   }
 
-  private getCost(weight: number): number {
-    return weight * this.RATE;
-  }
-
   private getShipmentId(shipmentID: number): number {
     if (shipmentID) return shipmentID;
     return this.idGenerator.generate();
@@ -33,7 +29,8 @@ export class Shipment implements IShipment{
 
   public ship(): string {
     const id: number = this.getShipmentId(this.shipmentID);
-    const cost: number = this.getCost(this.weight);
+    const shipper = new ShipperFactory(this.weight, this.fromZipCode) as IShipper;
+    const cost: number = shipper.getCost();
     return `${id}, from: ${this.fromZipCode} ${this.fromAddress}, to: ${this.toZipCode} ${this.toAddress}, cost: ${cost}`;
   }
 }

@@ -18,3 +18,7 @@ export type ShipmentData = {
 export interface IApi {
   shipItem(shipmentData: ShipmentData): string;
 }
+
+export interface IShipper {
+  getCost(): number;
+}
