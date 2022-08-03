@@ -22,3 +22,30 @@ export interface IApi {
 export interface IShipper {
   getCost(): number;
 }
+
+export interface Strategy {
+  execute(weight: number, zipCodeStart: string): number;
+}
+
+export interface Context {
+  setStrategy(s: Strategy): void;
+  execute(weight: number, zipCodeStart: string): number;
+}
+
+export enum ItemWeight {
+  SMALL = 15,
+  MEDIUD = 160,
+}
+
+export enum ItemType {
+  LETTER_TYPE = 'Letter',
+  PACKAGES_TYPE = 'Packages',
+  OVERSIZE_TYPE = 'Oversize',
+}
+
+export enum ZipCodeTypes {
+  AirEast = '3',
+  ChicagoSprint = '6',
+  PacificParcel = '9',
+}
+
