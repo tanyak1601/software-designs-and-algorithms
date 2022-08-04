@@ -23,4 +23,7 @@ client.shipItem({
   fromZipCode: '12345',
   toAddress: 'New York',
   toZipCode: '55555',
+  fragile: true,
+  doNotLeave: true,
+  returnReceiptRequested: true,
 });

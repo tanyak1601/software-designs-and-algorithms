@@ -1,9 +1,7 @@
 import { IShipment, IdGenerator, ShipmentData, IShipper, ItemWeight, ItemType, Strategy, ZipCodeTypes, Context } from './types'
 import { AirEastStrategy, ChicagoSprintStrategy, PacificParcelStrategy } from './ShipperStrategy';
 
-export class Shipment implements IShipment{
-  private RATE: number = 39;
-
+export class Shipment implements IShipment {
   private shipmentID: number;
   private weight: number;
   private fromAddress: string;
@@ -12,6 +10,7 @@ export class Shipment implements IShipment{
   private toZipCode: string;
   private idGenerator: IdGenerator;
   private shipperCostContext: Context;
+
 
   public constructor(shipmentData: ShipmentData, idGenerator: IdGenerator, shipperCostContext: Context) {
     this.shipmentID = shipmentData?.shipmentID;

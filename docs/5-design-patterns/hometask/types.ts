@@ -13,6 +13,9 @@ export type ShipmentData = {
   fromZipCode: string;
   toAddress: string;
   toZipCode: string;
+  fragile: boolean;
+  doNotLeave: boolean;
+  returnReceiptRequested: boolean;
 };
 
 export interface IApi {
