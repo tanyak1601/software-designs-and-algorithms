@@ -1,22 +1,20 @@
 import { vertices, edges } from './VertecesAndEdges';
-import { WeightedGraph, IVertex, IEdge } from './types';
+import { WeightedGraph, IVertex } from './types';
 
 class Graph implements WeightedGraph {
-  private adjacentList: Map<string, object>;
+  adjacentList: object;
 
   constructor() {
-    this.adjacentList = new Map();
+    this.adjacentList = {};
   }
 
   addVertex(key: string): void {
-    this.adjacentList.set(key, {});
+    this.adjacentList[key] = {};
   }
 
   addEdge(from: IVertex, to: IVertex, weight: number): void {
-    const graphItem = this.adjacentList.get(from.value);
-    if (graphItem) {
-      graphItem[to.value] = weight;
-    }
+    this.adjacentList[from.value][to.value] = weight;
+    this.adjacentList[to.value][from.value] = weight;
   }
 }
 
@@ -25,4 +23,4 @@ const graph: Graph = new Graph();
 vertices.forEach(verticle => graph.addVertex(verticle.value));
 edges.forEach(edge => graph.addEdge(edge.from, edge.to, edge.weight));
 
-console.log();
+console.log(graph.adjacentList);

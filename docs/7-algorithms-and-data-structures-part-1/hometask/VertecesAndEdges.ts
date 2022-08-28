@@ -1,6 +1,6 @@
 import { IVertex, IEdge } from './types';
 
-class Vertex implements IVertex{
+export class Vertex implements IVertex{
   value: string;
 
   constructor(value: string) {
@@ -24,6 +24,7 @@ const vertex1: IVertex = new Vertex('1');
 const vertex2: IVertex = new Vertex('2');
 const vertex3: IVertex = new Vertex('3');
 const vertex4: IVertex = new Vertex('4');
+const vertex5: IVertex = new Vertex('5');
 
 const edge1: IEdge = new Edge(vertex1, vertex4, 3);
 const edge2: IEdge = new Edge(vertex1, vertex2, 5);
